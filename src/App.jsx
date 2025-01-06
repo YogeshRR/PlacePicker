@@ -17,7 +17,7 @@ function App() {
   const selectedPlace = useRef();
   const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
   const [availablePlaces, setAvailablePlaces] = useState([]);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(true);
   
 
   useEffect(() => {
@@ -60,17 +60,16 @@ function App() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
-    setModalOpen(false);
+       setModalOpen(false);
 
     const storedIds = JSON.parse(localStorage.getItem('selectedPlaces') || []);
     localStorage.setItem('selectedPlaces', JSON.stringify(storedIds.filter((id)=> id !== selectedPlace.current)))
-  }, []
-) 
+  }, []) ;
 
    
   return (
     <>
-      <Modal open = {isModalOpen} onClose={handleRemovePlace} >  
+      <Modal open = {isModalOpen} onClose={handleStopRemovePlace} >  
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
           onConfirm={handleRemovePlace}

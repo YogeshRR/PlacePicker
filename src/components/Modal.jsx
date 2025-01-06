@@ -9,11 +9,11 @@ function Modal({ children, open, onClose }) {
  }else {
    dialog.current.close();
  }
- },[open])
+ },[open]);
 
   
   return createPortal(
-    <dialog className="modal" ref={dialog}>
+    <dialog className="modal" ref={dialog} onClose={onClose} >
       {open ? children : null}
     </dialog>,
     document.getElementById('modal')
